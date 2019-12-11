@@ -1,0 +1,9 @@
+
+level1.o：     文件格式 elf64-x86-64
+
+
+Disassembly of section .text:
+
+0000000000000000 <.text>:
+   0:	68 c0 17 40 00       	pushq  $0x4017c0
+   5:	c3                   	retq   

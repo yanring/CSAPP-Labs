@@ -1,5 +1,5 @@
 
-ctarget:     file format elf64-x86-64
+ctarget：     文件格式 elf64-x86-64
 
 
 Disassembly of section .init:
@@ -12,180 +12,180 @@ Disassembly of section .init:
 
 Disassembly of section .plt:
 
-0000000000400c60 <strcasecmp@plt-0x10>:
+0000000000400c60 <.plt>:
   400c60:	ff 35 8a 33 20 00    	pushq  0x20338a(%rip)        # 603ff0 <_GLOBAL_OFFSET_TABLE_+0x8>
   400c66:	ff 25 8c 33 20 00    	jmpq   *0x20338c(%rip)        # 603ff8 <_GLOBAL_OFFSET_TABLE_+0x10>
   400c6c:	0f 1f 40 00          	nopl   0x0(%rax)
 
 0000000000400c70 <strcasecmp@plt>:
-  400c70:	ff 25 8a 33 20 00    	jmpq   *0x20338a(%rip)        # 604000 <_GLOBAL_OFFSET_TABLE_+0x18>
+  400c70:	ff 25 8a 33 20 00    	jmpq   *0x20338a(%rip)        # 604000 <strcasecmp@GLIBC_2.2.5>
   400c76:	68 00 00 00 00       	pushq  $0x0
-  400c7b:	e9 e0 ff ff ff       	jmpq   400c60 <_init+0x18>
+  400c7b:	e9 e0 ff ff ff       	jmpq   400c60 <.plt>
 
 0000000000400c80 <__errno_location@plt>:
-  400c80:	ff 25 82 33 20 00    	jmpq   *0x203382(%rip)        # 604008 <_GLOBAL_OFFSET_TABLE_+0x20>
+  400c80:	ff 25 82 33 20 00    	jmpq   *0x203382(%rip)        # 604008 <__errno_location@GLIBC_2.2.5>
   400c86:	68 01 00 00 00       	pushq  $0x1
-  400c8b:	e9 d0 ff ff ff       	jmpq   400c60 <_init+0x18>
+  400c8b:	e9 d0 ff ff ff       	jmpq   400c60 <.plt>
 
 0000000000400c90 <srandom@plt>:
-  400c90:	ff 25 7a 33 20 00    	jmpq   *0x20337a(%rip)        # 604010 <_GLOBAL_OFFSET_TABLE_+0x28>
+  400c90:	ff 25 7a 33 20 00    	jmpq   *0x20337a(%rip)        # 604010 <srandom@GLIBC_2.2.5>
   400c96:	68 02 00 00 00       	pushq  $0x2
-  400c9b:	e9 c0 ff ff ff       	jmpq   400c60 <_init+0x18>
+  400c9b:	e9 c0 ff ff ff       	jmpq   400c60 <.plt>
 
 0000000000400ca0 <strncmp@plt>:
-  400ca0:	ff 25 72 33 20 00    	jmpq   *0x203372(%rip)        # 604018 <_GLOBAL_OFFSET_TABLE_+0x30>
+  400ca0:	ff 25 72 33 20 00    	jmpq   *0x203372(%rip)        # 604018 <strncmp@GLIBC_2.2.5>
   400ca6:	68 03 00 00 00       	pushq  $0x3
-  400cab:	e9 b0 ff ff ff       	jmpq   400c60 <_init+0x18>
+  400cab:	e9 b0 ff ff ff       	jmpq   400c60 <.plt>
 
 0000000000400cb0 <strcpy@plt>:
-  400cb0:	ff 25 6a 33 20 00    	jmpq   *0x20336a(%rip)        # 604020 <_GLOBAL_OFFSET_TABLE_+0x38>
+  400cb0:	ff 25 6a 33 20 00    	jmpq   *0x20336a(%rip)        # 604020 <strcpy@GLIBC_2.2.5>
   400cb6:	68 04 00 00 00       	pushq  $0x4
-  400cbb:	e9 a0 ff ff ff       	jmpq   400c60 <_init+0x18>
+  400cbb:	e9 a0 ff ff ff       	jmpq   400c60 <.plt>
 
 0000000000400cc0 <puts@plt>:
-  400cc0:	ff 25 62 33 20 00    	jmpq   *0x203362(%rip)        # 604028 <_GLOBAL_OFFSET_TABLE_+0x40>
+  400cc0:	ff 25 62 33 20 00    	jmpq   *0x203362(%rip)        # 604028 <puts@GLIBC_2.2.5>
   400cc6:	68 05 00 00 00       	pushq  $0x5
-  400ccb:	e9 90 ff ff ff       	jmpq   400c60 <_init+0x18>
+  400ccb:	e9 90 ff ff ff       	jmpq   400c60 <.plt>
 
 0000000000400cd0 <write@plt>:
-  400cd0:	ff 25 5a 33 20 00    	jmpq   *0x20335a(%rip)        # 604030 <_GLOBAL_OFFSET_TABLE_+0x48>
+  400cd0:	ff 25 5a 33 20 00    	jmpq   *0x20335a(%rip)        # 604030 <write@GLIBC_2.2.5>
   400cd6:	68 06 00 00 00       	pushq  $0x6
-  400cdb:	e9 80 ff ff ff       	jmpq   400c60 <_init+0x18>
+  400cdb:	e9 80 ff ff ff       	jmpq   400c60 <.plt>
 
 0000000000400ce0 <__stack_chk_fail@plt>:
-  400ce0:	ff 25 52 33 20 00    	jmpq   *0x203352(%rip)        # 604038 <_GLOBAL_OFFSET_TABLE_+0x50>
+  400ce0:	ff 25 52 33 20 00    	jmpq   *0x203352(%rip)        # 604038 <__stack_chk_fail@GLIBC_2.4>
   400ce6:	68 07 00 00 00       	pushq  $0x7
-  400ceb:	e9 70 ff ff ff       	jmpq   400c60 <_init+0x18>
+  400ceb:	e9 70 ff ff ff       	jmpq   400c60 <.plt>
 
 0000000000400cf0 <mmap@plt>:
-  400cf0:	ff 25 4a 33 20 00    	jmpq   *0x20334a(%rip)        # 604040 <_GLOBAL_OFFSET_TABLE_+0x58>
+  400cf0:	ff 25 4a 33 20 00    	jmpq   *0x20334a(%rip)        # 604040 <mmap@GLIBC_2.2.5>
   400cf6:	68 08 00 00 00       	pushq  $0x8
-  400cfb:	e9 60 ff ff ff       	jmpq   400c60 <_init+0x18>
+  400cfb:	e9 60 ff ff ff       	jmpq   400c60 <.plt>
 
 0000000000400d00 <memset@plt>:
-  400d00:	ff 25 42 33 20 00    	jmpq   *0x203342(%rip)        # 604048 <_GLOBAL_OFFSET_TABLE_+0x60>
+  400d00:	ff 25 42 33 20 00    	jmpq   *0x203342(%rip)        # 604048 <memset@GLIBC_2.2.5>
   400d06:	68 09 00 00 00       	pushq  $0x9
-  400d0b:	e9 50 ff ff ff       	jmpq   400c60 <_init+0x18>
+  400d0b:	e9 50 ff ff ff       	jmpq   400c60 <.plt>
 
 0000000000400d10 <alarm@plt>:
-  400d10:	ff 25 3a 33 20 00    	jmpq   *0x20333a(%rip)        # 604050 <_GLOBAL_OFFSET_TABLE_+0x68>
+  400d10:	ff 25 3a 33 20 00    	jmpq   *0x20333a(%rip)        # 604050 <alarm@GLIBC_2.2.5>
   400d16:	68 0a 00 00 00       	pushq  $0xa
-  400d1b:	e9 40 ff ff ff       	jmpq   400c60 <_init+0x18>
+  400d1b:	e9 40 ff ff ff       	jmpq   400c60 <.plt>
 
 0000000000400d20 <close@plt>:
-  400d20:	ff 25 32 33 20 00    	jmpq   *0x203332(%rip)        # 604058 <_GLOBAL_OFFSET_TABLE_+0x70>
+  400d20:	ff 25 32 33 20 00    	jmpq   *0x203332(%rip)        # 604058 <close@GLIBC_2.2.5>
   400d26:	68 0b 00 00 00       	pushq  $0xb
-  400d2b:	e9 30 ff ff ff       	jmpq   400c60 <_init+0x18>
+  400d2b:	e9 30 ff ff ff       	jmpq   400c60 <.plt>
 
 0000000000400d30 <read@plt>:
-  400d30:	ff 25 2a 33 20 00    	jmpq   *0x20332a(%rip)        # 604060 <_GLOBAL_OFFSET_TABLE_+0x78>
+  400d30:	ff 25 2a 33 20 00    	jmpq   *0x20332a(%rip)        # 604060 <read@GLIBC_2.2.5>
   400d36:	68 0c 00 00 00       	pushq  $0xc
-  400d3b:	e9 20 ff ff ff       	jmpq   400c60 <_init+0x18>
+  400d3b:	e9 20 ff ff ff       	jmpq   400c60 <.plt>
 
 0000000000400d40 <__libc_start_main@plt>:
-  400d40:	ff 25 22 33 20 00    	jmpq   *0x203322(%rip)        # 604068 <_GLOBAL_OFFSET_TABLE_+0x80>
+  400d40:	ff 25 22 33 20 00    	jmpq   *0x203322(%rip)        # 604068 <__libc_start_main@GLIBC_2.2.5>
   400d46:	68 0d 00 00 00       	pushq  $0xd
-  400d4b:	e9 10 ff ff ff       	jmpq   400c60 <_init+0x18>
+  400d4b:	e9 10 ff ff ff       	jmpq   400c60 <.plt>
 
 0000000000400d50 <signal@plt>:
-  400d50:	ff 25 1a 33 20 00    	jmpq   *0x20331a(%rip)        # 604070 <_GLOBAL_OFFSET_TABLE_+0x88>
+  400d50:	ff 25 1a 33 20 00    	jmpq   *0x20331a(%rip)        # 604070 <signal@GLIBC_2.2.5>
   400d56:	68 0e 00 00 00       	pushq  $0xe
-  400d5b:	e9 00 ff ff ff       	jmpq   400c60 <_init+0x18>
+  400d5b:	e9 00 ff ff ff       	jmpq   400c60 <.plt>
 
 0000000000400d60 <gethostbyname@plt>:
-  400d60:	ff 25 12 33 20 00    	jmpq   *0x203312(%rip)        # 604078 <_GLOBAL_OFFSET_TABLE_+0x90>
+  400d60:	ff 25 12 33 20 00    	jmpq   *0x203312(%rip)        # 604078 <gethostbyname@GLIBC_2.2.5>
   400d66:	68 0f 00 00 00       	pushq  $0xf
-  400d6b:	e9 f0 fe ff ff       	jmpq   400c60 <_init+0x18>
+  400d6b:	e9 f0 fe ff ff       	jmpq   400c60 <.plt>
 
 0000000000400d70 <__memmove_chk@plt>:
-  400d70:	ff 25 0a 33 20 00    	jmpq   *0x20330a(%rip)        # 604080 <_GLOBAL_OFFSET_TABLE_+0x98>
+  400d70:	ff 25 0a 33 20 00    	jmpq   *0x20330a(%rip)        # 604080 <__memmove_chk@GLIBC_2.3.4>
   400d76:	68 10 00 00 00       	pushq  $0x10
-  400d7b:	e9 e0 fe ff ff       	jmpq   400c60 <_init+0x18>
+  400d7b:	e9 e0 fe ff ff       	jmpq   400c60 <.plt>
 
 0000000000400d80 <strtol@plt>:
-  400d80:	ff 25 02 33 20 00    	jmpq   *0x203302(%rip)        # 604088 <_GLOBAL_OFFSET_TABLE_+0xa0>
+  400d80:	ff 25 02 33 20 00    	jmpq   *0x203302(%rip)        # 604088 <strtol@GLIBC_2.2.5>
   400d86:	68 11 00 00 00       	pushq  $0x11
-  400d8b:	e9 d0 fe ff ff       	jmpq   400c60 <_init+0x18>
+  400d8b:	e9 d0 fe ff ff       	jmpq   400c60 <.plt>
 
 0000000000400d90 <memcpy@plt>:
-  400d90:	ff 25 fa 32 20 00    	jmpq   *0x2032fa(%rip)        # 604090 <_GLOBAL_OFFSET_TABLE_+0xa8>
+  400d90:	ff 25 fa 32 20 00    	jmpq   *0x2032fa(%rip)        # 604090 <memcpy@GLIBC_2.14>
   400d96:	68 12 00 00 00       	pushq  $0x12
-  400d9b:	e9 c0 fe ff ff       	jmpq   400c60 <_init+0x18>
+  400d9b:	e9 c0 fe ff ff       	jmpq   400c60 <.plt>
 
 0000000000400da0 <time@plt>:
-  400da0:	ff 25 f2 32 20 00    	jmpq   *0x2032f2(%rip)        # 604098 <_GLOBAL_OFFSET_TABLE_+0xb0>
+  400da0:	ff 25 f2 32 20 00    	jmpq   *0x2032f2(%rip)        # 604098 <time@GLIBC_2.2.5>
   400da6:	68 13 00 00 00       	pushq  $0x13
-  400dab:	e9 b0 fe ff ff       	jmpq   400c60 <_init+0x18>
+  400dab:	e9 b0 fe ff ff       	jmpq   400c60 <.plt>
 
 0000000000400db0 <random@plt>:
-  400db0:	ff 25 ea 32 20 00    	jmpq   *0x2032ea(%rip)        # 6040a0 <_GLOBAL_OFFSET_TABLE_+0xb8>
+  400db0:	ff 25 ea 32 20 00    	jmpq   *0x2032ea(%rip)        # 6040a0 <random@GLIBC_2.2.5>
   400db6:	68 14 00 00 00       	pushq  $0x14
-  400dbb:	e9 a0 fe ff ff       	jmpq   400c60 <_init+0x18>
+  400dbb:	e9 a0 fe ff ff       	jmpq   400c60 <.plt>
 
 0000000000400dc0 <_IO_getc@plt>:
-  400dc0:	ff 25 e2 32 20 00    	jmpq   *0x2032e2(%rip)        # 6040a8 <_GLOBAL_OFFSET_TABLE_+0xc0>
+  400dc0:	ff 25 e2 32 20 00    	jmpq   *0x2032e2(%rip)        # 6040a8 <_IO_getc@GLIBC_2.2.5>
   400dc6:	68 15 00 00 00       	pushq  $0x15
-  400dcb:	e9 90 fe ff ff       	jmpq   400c60 <_init+0x18>
+  400dcb:	e9 90 fe ff ff       	jmpq   400c60 <.plt>
 
 0000000000400dd0 <__isoc99_sscanf@plt>:
-  400dd0:	ff 25 da 32 20 00    	jmpq   *0x2032da(%rip)        # 6040b0 <_GLOBAL_OFFSET_TABLE_+0xc8>
+  400dd0:	ff 25 da 32 20 00    	jmpq   *0x2032da(%rip)        # 6040b0 <__isoc99_sscanf@GLIBC_2.7>
   400dd6:	68 16 00 00 00       	pushq  $0x16
-  400ddb:	e9 80 fe ff ff       	jmpq   400c60 <_init+0x18>
+  400ddb:	e9 80 fe ff ff       	jmpq   400c60 <.plt>
 
 0000000000400de0 <munmap@plt>:
-  400de0:	ff 25 d2 32 20 00    	jmpq   *0x2032d2(%rip)        # 6040b8 <_GLOBAL_OFFSET_TABLE_+0xd0>
+  400de0:	ff 25 d2 32 20 00    	jmpq   *0x2032d2(%rip)        # 6040b8 <munmap@GLIBC_2.2.5>
   400de6:	68 17 00 00 00       	pushq  $0x17
-  400deb:	e9 70 fe ff ff       	jmpq   400c60 <_init+0x18>
+  400deb:	e9 70 fe ff ff       	jmpq   400c60 <.plt>
 
 0000000000400df0 <__printf_chk@plt>:
-  400df0:	ff 25 ca 32 20 00    	jmpq   *0x2032ca(%rip)        # 6040c0 <_GLOBAL_OFFSET_TABLE_+0xd8>
+  400df0:	ff 25 ca 32 20 00    	jmpq   *0x2032ca(%rip)        # 6040c0 <__printf_chk@GLIBC_2.3.4>
   400df6:	68 18 00 00 00       	pushq  $0x18
-  400dfb:	e9 60 fe ff ff       	jmpq   400c60 <_init+0x18>
+  400dfb:	e9 60 fe ff ff       	jmpq   400c60 <.plt>
 
 0000000000400e00 <fopen@plt>:
-  400e00:	ff 25 c2 32 20 00    	jmpq   *0x2032c2(%rip)        # 6040c8 <_GLOBAL_OFFSET_TABLE_+0xe0>
+  400e00:	ff 25 c2 32 20 00    	jmpq   *0x2032c2(%rip)        # 6040c8 <fopen@GLIBC_2.2.5>
   400e06:	68 19 00 00 00       	pushq  $0x19
-  400e0b:	e9 50 fe ff ff       	jmpq   400c60 <_init+0x18>
+  400e0b:	e9 50 fe ff ff       	jmpq   400c60 <.plt>
 
 0000000000400e10 <getopt@plt>:
-  400e10:	ff 25 ba 32 20 00    	jmpq   *0x2032ba(%rip)        # 6040d0 <_GLOBAL_OFFSET_TABLE_+0xe8>
+  400e10:	ff 25 ba 32 20 00    	jmpq   *0x2032ba(%rip)        # 6040d0 <getopt@GLIBC_2.2.5>
   400e16:	68 1a 00 00 00       	pushq  $0x1a
-  400e1b:	e9 40 fe ff ff       	jmpq   400c60 <_init+0x18>
+  400e1b:	e9 40 fe ff ff       	jmpq   400c60 <.plt>
 
 0000000000400e20 <strtoul@plt>:
-  400e20:	ff 25 b2 32 20 00    	jmpq   *0x2032b2(%rip)        # 6040d8 <_GLOBAL_OFFSET_TABLE_+0xf0>
+  400e20:	ff 25 b2 32 20 00    	jmpq   *0x2032b2(%rip)        # 6040d8 <strtoul@GLIBC_2.2.5>
   400e26:	68 1b 00 00 00       	pushq  $0x1b
-  400e2b:	e9 30 fe ff ff       	jmpq   400c60 <_init+0x18>
+  400e2b:	e9 30 fe ff ff       	jmpq   400c60 <.plt>
 
 0000000000400e30 <gethostname@plt>:
-  400e30:	ff 25 aa 32 20 00    	jmpq   *0x2032aa(%rip)        # 6040e0 <_GLOBAL_OFFSET_TABLE_+0xf8>
+  400e30:	ff 25 aa 32 20 00    	jmpq   *0x2032aa(%rip)        # 6040e0 <gethostname@GLIBC_2.2.5>
   400e36:	68 1c 00 00 00       	pushq  $0x1c
-  400e3b:	e9 20 fe ff ff       	jmpq   400c60 <_init+0x18>
+  400e3b:	e9 20 fe ff ff       	jmpq   400c60 <.plt>
 
 0000000000400e40 <exit@plt>:
-  400e40:	ff 25 a2 32 20 00    	jmpq   *0x2032a2(%rip)        # 6040e8 <_GLOBAL_OFFSET_TABLE_+0x100>
+  400e40:	ff 25 a2 32 20 00    	jmpq   *0x2032a2(%rip)        # 6040e8 <exit@GLIBC_2.2.5>
   400e46:	68 1d 00 00 00       	pushq  $0x1d
-  400e4b:	e9 10 fe ff ff       	jmpq   400c60 <_init+0x18>
+  400e4b:	e9 10 fe ff ff       	jmpq   400c60 <.plt>
 
 0000000000400e50 <connect@plt>:
-  400e50:	ff 25 9a 32 20 00    	jmpq   *0x20329a(%rip)        # 6040f0 <_GLOBAL_OFFSET_TABLE_+0x108>
+  400e50:	ff 25 9a 32 20 00    	jmpq   *0x20329a(%rip)        # 6040f0 <connect@GLIBC_2.2.5>
   400e56:	68 1e 00 00 00       	pushq  $0x1e
-  400e5b:	e9 00 fe ff ff       	jmpq   400c60 <_init+0x18>
+  400e5b:	e9 00 fe ff ff       	jmpq   400c60 <.plt>
 
 0000000000400e60 <__fprintf_chk@plt>:
-  400e60:	ff 25 92 32 20 00    	jmpq   *0x203292(%rip)        # 6040f8 <_GLOBAL_OFFSET_TABLE_+0x110>
+  400e60:	ff 25 92 32 20 00    	jmpq   *0x203292(%rip)        # 6040f8 <__fprintf_chk@GLIBC_2.3.4>
   400e66:	68 1f 00 00 00       	pushq  $0x1f
-  400e6b:	e9 f0 fd ff ff       	jmpq   400c60 <_init+0x18>
+  400e6b:	e9 f0 fd ff ff       	jmpq   400c60 <.plt>
 
 0000000000400e70 <__sprintf_chk@plt>:
-  400e70:	ff 25 8a 32 20 00    	jmpq   *0x20328a(%rip)        # 604100 <_GLOBAL_OFFSET_TABLE_+0x118>
+  400e70:	ff 25 8a 32 20 00    	jmpq   *0x20328a(%rip)        # 604100 <__sprintf_chk@GLIBC_2.3.4>
   400e76:	68 20 00 00 00       	pushq  $0x20
-  400e7b:	e9 e0 fd ff ff       	jmpq   400c60 <_init+0x18>
+  400e7b:	e9 e0 fd ff ff       	jmpq   400c60 <.plt>
 
 0000000000400e80 <socket@plt>:
-  400e80:	ff 25 82 32 20 00    	jmpq   *0x203282(%rip)        # 604108 <_GLOBAL_OFFSET_TABLE_+0x120>
+  400e80:	ff 25 82 32 20 00    	jmpq   *0x203282(%rip)        # 604108 <socket@GLIBC_2.2.5>
   400e86:	68 21 00 00 00       	pushq  $0x21
-  400e8b:	e9 d0 fd ff ff       	jmpq   400c60 <_init+0x18>
+  400e8b:	e9 d0 fd ff ff       	jmpq   400c60 <.plt>
 
 Disassembly of section .text:
 
@@ -207,7 +207,7 @@ Disassembly of section .text:
 
 0000000000400ebc <call_gmon_start>:
   400ebc:	48 83 ec 08          	sub    $0x8,%rsp
-  400ec0:	48 8b 05 19 31 20 00 	mov    0x203119(%rip),%rax        # 603fe0 <_DYNAMIC+0x1d0>
+  400ec0:	48 8b 05 19 31 20 00 	mov    0x203119(%rip),%rax        # 603fe0 <__gmon_start__>
   400ec7:	48 85 c0             	test   %rax,%rax
   400eca:	74 02                	je     400ece <call_gmon_start+0x12>
   400ecc:	ff d0                	callq  *%rax
