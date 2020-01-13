@@ -14,33 +14,34 @@ typedef struct
 } cacheline;
 int hit=0,miss=0,eviction=0;
 int load(int address, int offset, int index_group,int E, cacheline** cache){
-    // printf("index:%d ",index_group);
-    // printf("%d\n",cache[0][0].timestamp);
     cacheline *cache_group = cache[index_group];
-    int outdated_index = INT_MAX;
+    int outdated_index = 0;
     cacheline *item;
     time_t t;
     t = time(&t);
     for(int i = 0; i < E; i++){
         item  = &cache_group[i];
-        if(outdated_index>item->timestamp){
+        if(cache_group[outdated_index].timestamp>item->timestamp){
             outdated_index = i;
         }
-        if(address==item->tag && item->vaild==1){
+        if(address==item->tag){
             item->timestamp = t;
             item->vaild=1;
             hit++;
+            printf(" hit");
             return 1;
         }
     }
     item = & cache_group[outdated_index];
     if(item->timestamp != -1){
         eviction++;
+        printf(" eviction");
     }
     item->tag = address;
     item->timestamp = t;
     item->vaild = 1;
     miss++;
+    printf(" miss");
     return 0;
 }
 long hex2int(char* str){
@@ -94,7 +95,8 @@ int main(int argc, char * const argv[])
         address = hex2int(str2);
         offset=0;
         index_group=0;
-        // printf("%s | %s | %ld \n",str1,str2,address);
+        if(str1[0]=='I')
+            continue;
         for(i=0; i<b; i++){
             offset=2*offset+(address&1);
             address>>=1;
@@ -103,14 +105,12 @@ int main(int argc, char * const argv[])
             index_group=2*index_group+(address&1);
             address>>=1;
         }
+        printf("%s | %s | index:%d | add:%ld | hit:%d ",str1,str2,index_group,address,hit);
         load(address,offset,index_group,E,cache);
         if(str1[0]=='M')
             load(address,offset,index_group,E,cache);
-        // printf("%s | %s | index:%d | add:%ld | hit:%d\n",str1,str2,index_group,address,hit);
+        printf("\n");
     }
-    
-    // printf("%d%d%d \n",s,E,b);
-    
     printSummary(hit, miss, eviction);
     for (i=0; i<S; i++){
         free(cache[i]);

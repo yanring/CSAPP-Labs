@@ -8,10 +8,12 @@ TSH = ./tsh
 TSHREF = ./tshref
 TSHARGS = "-p"
 CC = gcc
-CFLAGS = -Wall -O2
-FILES = $(TSH) ./myspin ./mysplit ./mystop ./myint
+CFLAGS = -Wall -g
+LDLIBS = -lpthread
+FILES =  $(TSH) ./myspin ./mysplit ./mystop ./myint
 
-all: $(FILES)
+all: csapp.o $(FILES)
+tsh: csapp.c 
 
 ##################
 # Handin your work
