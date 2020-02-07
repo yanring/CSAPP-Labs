@@ -117,7 +117,7 @@ static void *extend_heap(size_t size){
     PUT(FTRP(fbp),PACK(asize,0));
     PUT((HDRP(NEXT_BLKP(fbp))),PACK(0,1)); //ending block
     insert_node(fbp,asize);
-    printf("heap extended\n");
+    printf("heap extended, %p, %p, %d\n", fbp,FTRP(fbp), asize);
     return coalesce(fbp);
 }
 
@@ -201,13 +201,13 @@ static void *place(void *fbp, size_t size){
         if (size >= 96){
             PUT(HDRP(fbp),PACK(left_size,0));
             PUT(FTRP(fbp),PACK(left_size,0));
-            PUT(HDRP(NEXT_BLKP(fbp)),PACK(block_size,1));
-            PUT(FTRP(NEXT_BLKP(fbp)),PACK(block_size,1));
+            PUT(HDRP(NEXT_BLKP(fbp)),PACK(size,1));
+            PUT(FTRP(NEXT_BLKP(fbp)),PACK(size,1));
             insert_node(fbp,left_size);
             return NEXT_BLKP(fbp);
         }else{
-            PUT(HDRP(fbp),PACK(block_size,1));
-            PUT(FTRP(fbp),PACK(block_size,1));
+            PUT(HDRP(fbp),PACK(size,1));
+            PUT(FTRP(fbp),PACK(size,1));
             PUT(HDRP(NEXT_BLKP(fbp)),PACK(left_size,0));
             PUT(FTRP(NEXT_BLKP(fbp)),PACK(left_size,0));
             insert_node(NEXT_BLKP(fbp),left_size);
@@ -223,7 +223,7 @@ int mm_init(void)
 {
     int i;
     for(i=0;i<MAX_SIZE_LIST;i++){
-        PTR(segregated_free_list[i],NULL);
+        segregated_free_list[i] = NULL;
     }
     if ((head_listsp = mem_sbrk(4 * WSIZE))==(void *)-1)
         return -1;
@@ -261,16 +261,17 @@ void *mm_malloc(size_t size)
                     break;
                 }
             }
-            target_size>>=1;
-            lineindex+=1;
-            
         }
+        target_size>>=1;
+        lineindex+=1;
     }
     if(fbp == NULL){
         if((fbp=extend_heap(MAX(asize,CHUNKSIZE)))==NULL)
             return NULL;
     }
+    printf("malloc %p \n",fbp);
     fbp=place(fbp,asize);
+    printf("malloc %p \n",fbp);
     return fbp;
     
 }
