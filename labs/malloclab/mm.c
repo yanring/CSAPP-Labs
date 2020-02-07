@@ -63,10 +63,12 @@ static void insert_node(void *fbp, size_t size){
     int lineindex=0;
     void *target_ptr=NULL;
     void *pred_of_target_ptr=NULL;
+    // int old_size = size;
     while((lineindex<(MAX_SIZE_LIST-1))&&(size>1)){
         size = size >> 1;
         lineindex+=1;
     }
+    // printf("insert node %d, %d \n", old_size, lineindex);
 
     target_ptr=segregated_free_list[lineindex];
     while ((target_ptr!=NULL)&&(size>GET_SIZE(HDRP(target_ptr))))
@@ -116,8 +118,9 @@ static void *extend_heap(size_t size){
     PUT(HDRP(fbp),PACK(asize,0));
     PUT(FTRP(fbp),PACK(asize,0));
     PUT((HDRP(NEXT_BLKP(fbp))),PACK(0,1)); //ending block
+    // PUT((FTRP(NEXT_BLKP(fbp))),PACK(0,1));
     insert_node(fbp,asize);
-    printf("heap extended, %p, %p, %d\n", fbp,FTRP(fbp), asize);
+    // printf("heap extended %p, %p, %d , end in %p \n", fbp,FTRP(fbp), asize,(HDRP(NEXT_BLKP(fbp)))+3);
     return coalesce(fbp);
 }
 
@@ -135,10 +138,10 @@ static void delete_node(void *fbp){
         // not the last
         if(PRED_BLKP(fbp)!=NULL){
             PTR(SUCC_P((PRED_BLKP(fbp))),SUCC_BLKP(fbp));
-            PTR(PRED_BLKP((SUCC_BLKP(fbp))),PRED_BLKP(fbp));
+            PTR(PRED_P((SUCC_BLKP(fbp))),PRED_BLKP(fbp));
         }else{
             segregated_free_list[lineindex] = SUCC_BLKP(fbp);
-            PTR(PRED_BLKP((SUCC_BLKP(fbp))),NULL);
+            PTR(PRED_P((SUCC_BLKP(fbp))),NULL);
         }
     }else{
         if(PRED_BLKP(fbp)!=NULL){
@@ -195,6 +198,7 @@ static void *place(void *fbp, size_t size){
         // 如果剩余块小于最小块，就不分离原块
         PUT(HDRP(fbp),PACK(block_size,1));
         PUT(FTRP(fbp),PACK(block_size,1));
+        // printf("malloc %p %p %d \n",fbp,FTRP(fbp)-1,GET_SIZE(FTRP(fbp)));
         return fbp;
     }else{
         // 分离原块，且小块靠左，大块靠右，思路参考李秋豪：https://www.cnblogs.com/liqiuhao/p/8252373.html
@@ -203,7 +207,13 @@ static void *place(void *fbp, size_t size){
             PUT(FTRP(fbp),PACK(left_size,0));
             PUT(HDRP(NEXT_BLKP(fbp)),PACK(size,1));
             PUT(FTRP(NEXT_BLKP(fbp)),PACK(size,1));
+            // char * left = NEXT_BLKP(fbp);
+            // printf("block size %d ",block_size);
+            // printf("malloc %p %p %d ",left,FTRP(left)-1,GET_SIZE(FTRP(left)));
+            // printf("left %p %p %d \n",fbp,FTRP(fbp)-1,GET_SIZE(FTRP(fbp)));
             insert_node(fbp,left_size);
+
+            
             return NEXT_BLKP(fbp);
         }else{
             PUT(HDRP(fbp),PACK(size,1));
@@ -211,6 +221,8 @@ static void *place(void *fbp, size_t size){
             PUT(HDRP(NEXT_BLKP(fbp)),PACK(left_size,0));
             PUT(FTRP(NEXT_BLKP(fbp)),PACK(left_size,0));
             insert_node(NEXT_BLKP(fbp),left_size);
+            
+
             return fbp;
         }
     }
@@ -256,10 +268,10 @@ void *mm_malloc(size_t size)
             fbp = (void *)segregated_free_list[lineindex];
             while ((fbp!=NULL)&&(asize>(GET_SIZE(HDRP(fbp)))))
             {
-                fbp=SUCC_BLKP(fbp);
-                if(fbp!=NULL){
-                    break;
-                }
+                fbp=SUCC_BLKP(fbp);  
+            }
+            if(fbp!=NULL){
+                break;
             }
         }
         target_size>>=1;
@@ -269,9 +281,9 @@ void *mm_malloc(size_t size)
         if((fbp=extend_heap(MAX(asize,CHUNKSIZE)))==NULL)
             return NULL;
     }
-    printf("malloc %p \n",fbp);
+    // printf("malloc %p \n",fbp);
     fbp=place(fbp,asize);
-    printf("malloc %p \n",fbp);
+    // printf("malloc %p %p %d\n",fbp,FTRP(fbp)-1,GET_SIZE(FTRP(fbp)));
     return fbp;
     
 }
@@ -293,31 +305,42 @@ void mm_free(void *ptr)
 /*
  * mm_realloc - Implemented simply in terms of mm_malloc and mm_free
  */
+
 void *mm_realloc(void *ptr, size_t size)
 {
+    // printf("realloc %p %d\n",ptr,size);
+
     void *new_block = ptr;
-    int remainder=0;
+    // int remainder=0;
     if (size == 0){
-        mm_free(ptr);
+        // mm_free(ptr);
         return NULL;
     }
-    int old_size = size;
-    size = ALIGN(size + DSIZE);//TODO
+    int require_size = size;
+    int asize = ALIGN(size + DSIZE);//TODO
+    int old_size = GET_SIZE(HDRP(ptr));
     //如果size小于原本的大小，就直接返回
-    if(size <= GET_SIZE(HDRP(ptr))){
+    if(asize <= GET_SIZE(HDRP(ptr))){
+        // printf("no need realloc %p %p %d %d\n",ptr,FTRP(ptr)-1,size,GET_SIZE(HDRP(ptr)));
         return ptr;
     }
+    
+    
+    // printf("realloc %p %p %d\n",ptr,FTRP(ptr)-1,GET_SIZE(FTRP(ptr)));
+
     //检查地址的下一个块是否为free块，或者是堆的结束块，要尽可能利用相邻的块，以减少外部碎片
     if(!(GET_ALLOC(HDRP(NEXT_BLKP(ptr)))) || !(GET_SIZE(HDRP(NEXT_BLKP(ptr))))){
-        if((GET_SIZE(HDRP(NEXT_BLKP(ptr)))) + GET_SIZE(HDRP(ptr)) < size){
-            remainder = size - ((GET_SIZE(HDRP(NEXT_BLKP(ptr)))) + GET_SIZE(HDRP(ptr)));
-            if (extend_heap(MAX(remainder,CHUNKSIZE))==NULL)
+        // next is free or next is the end
+        int avil_size = ((GET_SIZE(HDRP(NEXT_BLKP(ptr)))) + GET_SIZE(HDRP(ptr)));
+        int add_size = asize - avil_size;
+        if(add_size>0){
+            if (extend_heap(MAX(add_size,CHUNKSIZE))==NULL)
                 return NULL;
-            remainder += MAX(remainder,CHUNKSIZE);
+            add_size = MAX(add_size,CHUNKSIZE);
         }
         delete_node(NEXT_BLKP(ptr));
-        PUT(HDRP(ptr),PACK(old_size+remainder,1));
-        PUT(FTRP(ptr),PACK(old_size+remainder,1));
+        PUT(HDRP(ptr),PACK(avil_size+add_size,1));
+        PUT(FTRP(ptr),PACK(avil_size+add_size,1));
     }else
     {
         // 需要删除ptr，再把内容复制到新申请的blk中
@@ -325,6 +348,8 @@ void *mm_realloc(void *ptr, size_t size)
         memcpy(new_block,ptr,old_size);
         mm_free(ptr);
     }
+    
+    // printf("realloc %p %p %d\n",ptr,FTRP(ptr)-1,GET_SIZE(FTRP(ptr)));
     return new_block;
 }
 
